@@ -1,10 +1,18 @@
 from .models import User,Job,Application
 from rest_framework import serializers
+from .models import User, Application, Job, Category
+from django.contrib.auth.hashers import make_password
+from rest_framework import viewsets
 
 class UserSerializer(serializers.ModelSerializer):
+    password = serializers.CharField()
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'role','gender']
+        fields = ['id', 'username', 'email', 'role','gender', 'password',]
+
+    def create(self, validated_data):
+        validated_data['password'] = make_password(validated_data.get('password'))
+        return super(UserSerializer, self).create(validated_data)
 
 class JobSerializer(serializers.ModelSerializer):
     class Meta:
