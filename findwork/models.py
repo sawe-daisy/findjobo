@@ -66,7 +66,7 @@ class Application(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     job = models.ForeignKey(Job, on_delete=models.CASCADE)
-    documents = models.ImageField(default='img.jpg')
+    documents = models.FileField(default='img.jpg')
     timestamp = models.DateTimeField(auto_now=True, auto_now_add=False)
 
 

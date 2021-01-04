@@ -5,7 +5,9 @@ from django.contrib.auth.hashers import make_password
 from rest_framework import viewsets
 
 class UserSerializer(serializers.ModelSerializer):
-    password = serializers.CharField()
+    @staticmethod
+    def validate_password(password: str) -> str:
+        return make_password(password)
     class Meta:
         model = User
         fields = ['id', 'username', 'email', 'role','gender', 'password',]
