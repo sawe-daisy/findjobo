@@ -16,11 +16,11 @@ import cloudinary
 import cloudinary.uploader
 import cloudinary.api
 
-ACCOUNT_EMAIL_VERIFICATION = 'none'
+# ACCOUNT_EMAIL_VERIFICATION = 'none'
 
-ACCOUNT_AUTHENTICATION_METHOD = 'username'
+# ACCOUNT_AUTHENTICATION_METHOD = 'username'
 
-ACCOUNT_EMAIL_REQUIRED = False
+# ACCOUNT_EMAIL_REQUIRED = False
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -51,11 +51,11 @@ INSTALLED_APPS = [
     'cloudinary',
     'findwork',
     'rest_framework',
-    'rest_auth',
-    'rest_framework.authtoken',
-    'allauth',
-    'allauth.account',
-    'rest_auth.registration',
+    # 'rest_auth',
+    # 'rest_framework.authtoken',
+    # 'allauth',
+    # 'allauth.account',
+    # 'rest_auth.registration',
     'django.contrib.sites',
 ]
 SITE_ID = 1

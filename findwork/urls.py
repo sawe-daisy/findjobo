@@ -20,8 +20,8 @@ urlpatterns = [
     path('jobs/', views.JobViewSet.as_view()),
     path('jobs/<int:pk>/', views.JobDetail.as_view()),
     path('applications/', views.ApplicationViewSet.as_view()),
-    path('rest-auth/',  include('rest_auth.urls')),
-    path('rest-auth/registration/',include('rest_auth.registration.urls'))
+    # path('rest-auth/',  include('rest_auth.urls')),
+    # path('rest-auth/registration/',include('rest_auth.registration.urls'))
      
 ]
 
