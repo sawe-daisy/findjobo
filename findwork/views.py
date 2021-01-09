@@ -2,10 +2,12 @@ from django.shortcuts import render
 from .serializer import *
 from .models import *
 from rest_framework import status
+from rest_framework.decorators import permission_classes
 from rest_framework.response import Response
 from django.http import Http404
 from rest_framework.views import APIView
 import json
+from .permissions import isEmployer
 from rest_framework.permissions import IsAuthenticated
 
 # Create your views here.
@@ -40,18 +42,31 @@ class EmployerViewSet(APIView):
         return Response(serializer.data)
   
 class JobViewSet(APIView):
-    def get(self, request, format=None):      
+    def get(self, request,format=None):      
         jobs = Job.objects.all()
         serializer = JobSerializer(jobs, many=True)
         return Response(serializer.data)
-    
-    def post(self, request, format=None):
-        permission_classes = [IsAuthenticated]
-        serializer = JobSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class JobPostViewSet(APIView):
+    # @isEmployer
+    # permission_classes= [isEmployer]
+    def get_object(self, id):
+        try:
+            return User.objects.get(id=id)
+        except User.DoesNotExist:
+            raise Http404
+    def post(self, request, id, format=None):
+        user=self.get_object(id)
+        if user.role=='employer':
+            serializer = JobSerializer(data=request.data)
+            user=user.id
+            if serializer.is_valid():
+                user=user.id
+                serializer.save(user=user)
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+        
 
 class JobDetail(APIView):
     """

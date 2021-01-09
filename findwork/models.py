@@ -25,10 +25,10 @@ CATEGORY = (
 )
 
 class User(AbstractUser):
-
+    first_name= models.CharField(max_length=10, null=True)
+    last_name= models.CharField(max_length=10, null=True)
     role = models.CharField(choices=ROLE,  max_length=10)
     gender = models.CharField(choices=GENDER, max_length=1)
-
     def __str__(self):
         return self.email
 
@@ -45,7 +45,7 @@ class Category(models.Model):
 
 class Job(models.Model):
 
-    user = models.ForeignKey(User, related_name='Use', on_delete=models.CASCADE) 
+    user = models.ForeignKey(User, related_name='employer', on_delete=models.CASCADE) 
     title = models.CharField(max_length=300)
     description = models.TextField()
     location = models.CharField(max_length=300)
