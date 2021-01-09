@@ -21,6 +21,7 @@ urlpatterns = [
     path('jobs/post/<int:id>/', views.JobPostViewSet.as_view(), name='jobs'),
     path('jobs/<int:pk>/', views.JobDetail.as_view()),
     path('applications/', views.ApplicationViewSet.as_view()),
+    path('api/logout/', TokenRefreshView.as_view(), name='logout'),
     # path('rest-auth/',  include('rest_auth.urls')),
     # path('rest-auth/registration/',include('rest_auth.registration.urls'))
      
