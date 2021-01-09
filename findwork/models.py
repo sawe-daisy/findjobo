@@ -1,4 +1,6 @@
 from django.db import models
+import cloudinary
+from cloudinary.models import CloudinaryField
 from django.contrib.auth.models import AbstractUser
 
 
@@ -28,12 +30,19 @@ class User(AbstractUser):
     first_name= models.CharField(max_length=10, null=True)
     last_name= models.CharField(max_length=10, null=True)
     role = models.CharField(choices=ROLE,  max_length=10)
-    gender = models.CharField(choices=GENDER, max_length=1)
+    profile= CloudinaryField(default='image.jpg')
+    bio= models.CharField(max_length=50, default='get to know us')
+    gender = models.CharField(choices=GENDER, max_length=5)
+
+    class Meta:
+        verbose_name = 'user'
+        verbose_name_plural = 'users'
+
     def __str__(self):
         return self.email
 
     def get_full_name(self):
-        return self.first_name+ ' ' + self.last_name
+        return self.first_name
  
 
 class Category(models.Model):

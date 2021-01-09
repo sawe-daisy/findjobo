@@ -19,3 +19,20 @@ def isEmployer(view_func):
         if role=='employer':
             return view_func(request, *args, **kwargs)
     return wrapper_function
+
+
+class IsAdminOrReadOnly(BasePermission):
+    def has_permission(self, request, view):
+        if request.method in SAFE_METHODS:
+            return True
+        else:
+            return request.user.is_staff
+        
+
+def IsAdmin(BasePermission): 
+    def has_permission(self, request, view):
+        employer = request.user.role == 'Employer'
+        return bool(
+             super().has_permission(request, view)
+             and (employer)
+            )      

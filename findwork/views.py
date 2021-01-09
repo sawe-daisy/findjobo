@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from django.http import Http404
 from rest_framework.views import APIView
 import json
-from .permissions import isEmployer
+from .permissions import *
 from rest_framework.permissions import IsAuthenticated
 
 # Create your views here.
@@ -48,7 +48,16 @@ class JobViewSet(APIView):
         return Response(serializer.data)
 
 class JobPostViewSet(APIView):
-    # @isEmployer
+
+    # def post(self, request,format=None):
+    #     permission_classes=[IsAdmin]
+    #     serializer = JobSerializer(data=request.data)
+    #     if serializer.is_valid():
+    #         serializer.save()
+    #         return Response(serializer.data, status=status.HTTP_201_CREATED)
+    #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    # return Response(status=status.HTTP_400_BAD_REQUEST)
+
     # permission_classes= [isEmployer]
     def get_object(self, id):
         try:
@@ -58,10 +67,10 @@ class JobPostViewSet(APIView):
     def post(self, request, id, format=None):
         user=self.get_object(id)
         if user.role=='employer':
-            serializer = JobSerializer(data=request.data)
             user=user.id
+            print(user)
+            serializer = JobSerializer(data=request.data)
             if serializer.is_valid():
-                user=user.id
                 serializer.save(user=user)
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
