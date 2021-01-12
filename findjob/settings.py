@@ -207,3 +207,7 @@ cloudinary.config(
 STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = "findwork.User"
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+}

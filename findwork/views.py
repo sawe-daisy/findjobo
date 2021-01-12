@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from rest_framework import filters
+from rest_framework import generics
 from .serializer import *
 from .models import *
 from rest_framework import status
@@ -119,4 +121,10 @@ class ApplicationViewSet(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)  
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
+
+class JobSearchApiView(generics.ListAPIView):
+    queryset=Job.objects.all()
+    serializer_class=JobSerializer
+    filter_backends=[filters.SearchFilter]
+    search_fields=['title', 'category'] 

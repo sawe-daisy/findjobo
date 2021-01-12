@@ -29,7 +29,7 @@ class IsAdminOrReadOnly(BasePermission):
             return request.user.is_staff
         
 
-def IsAdmin(BasePermission): 
+class IsAdmin(BasePermission): 
     def has_permission(self, request, view):
         employer = request.user.role == 'Employer'
         return bool(
