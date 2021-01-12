@@ -51,7 +51,6 @@ INSTALLED_APPS = [
     'cloudinary',
     'findwork',
     'rest_framework',
-    'django_filters',
     # 'rest_auth',
     # 'rest_framework.authtoken',
     # 'allauth',
@@ -209,6 +208,3 @@ STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = "findwork.User"
 
-REST_FRAMEWORK = {
-    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
-}
