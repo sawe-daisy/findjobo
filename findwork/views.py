@@ -28,6 +28,34 @@ class UserViewSet(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+class UserUpdateViewSet(APIView):
+    def get_object(self, pk):
+        try:
+            return User.objects.get(pk=pk)
+        except User.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk, format=None): 
+        pk = self.get_object(pk)
+        print(pk) 
+        serializer = UserSerializer(pk)
+        return Response(serializer.data)
+
+    def put(self, request, pk, format=None):
+        # permission_classes = [IsAuthenticated]
+        profile = self.get_object(pk)
+        serializer = UserSerializer(profile, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk, format=None):
+        # permission_classes = [IsAuthenticated]
+        user = self.get_object(pk)
+        User.delete(user)
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
 
 class EmployeeViewSet(APIView):
     permission_classes = [IsAuthenticated]
