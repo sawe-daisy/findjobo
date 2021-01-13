@@ -67,4 +67,4 @@ The user would like to.... :
 ### License
 [MIT](https://github.com/sawe-daisy/findjobo/blob/master/LICENSE)
 
-Copyright (c) 2020 **sawe-daisy**
+Copyright (c) 2021 **sawe-daisy**
