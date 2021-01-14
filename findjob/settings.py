@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'cloudinary',
     'findwork',
     'rest_framework',
+    'corsheaders',
     # 'rest_auth',
     # 'rest_framework.authtoken',
     # 'allauth',
