@@ -64,11 +64,13 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'django.middleware.common.CommonMiddleware',
     
 ]
 
@@ -208,4 +210,6 @@ cloudinary.config(
 STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = "findwork.User"
+APPEND_SLASH = False
+CORS_ALLOW_ALL_ORIGINS = True
 
